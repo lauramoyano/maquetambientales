@@ -16,6 +16,8 @@ import { useGLTF, CubeCamera } from '@react-three/drei'
 export function Car(props) {
   const group = useRef()
   const { nodes, materials } = useGLTF('static/porsche-transformed.glb')
+  const { setActiveEngine } = props
+  console.log(setActiveEngine, props)
 
   useLayoutEffect(() => {
     materials.paint.color.set('#ffdf71')
@@ -41,7 +43,7 @@ export function Car(props) {
     <group ref={group} {...props} dispose={null}>
       <CubeCamera frames={1} position={[0, 1.5, 0]} near={0.1} resolution={128}>
         {(texture) => (
-          <group position={[0, -1.5, 0]}>
+          <group position={[0, -1.5, 0]} onClick={() => setActiveEngine(true)}>
             <group rotation={[Math.PI / 2, 0, 0]}>
               <mesh
                 geometry={nodes.mesh_1_instance_0.geometry}
